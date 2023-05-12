@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "645de915b8ff89a738742965"
+  },
+  "Carrera": "Ingenieria en Desarrollo de Software",
+  "Descripcion": "Blablablablablablablabla",
+  "Departamento": "Ingenieria"
+},{
+  "_id": {
+    "$oid": "645e58054065ad79ff056f1f"
+  },
+  "Carrera": "Smashy bros",
+  "Descripcion": "trabajar en mcdonalds",
+  "Departamento": "No tiene"
+}]

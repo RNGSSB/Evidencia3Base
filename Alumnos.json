@@ -1,0 +1,35 @@
+[{
+  "_id": {
+    "$oid": "645de7bfb8ff89a73874295e"
+  },
+  "Nombre": "Diego Azael",
+  "Apellidos": {
+    "apellido1": "Torres",
+    "apellido2": "Hernandez"
+  },
+  "Nacimiento": {
+    "$date": "2004-08-11T00:00:00.000Z"
+  },
+  "Carrera": "Ingenieria en Desarrollo de Software",
+  "Estatus": "Inscrito",
+  "Correo": "",
+  "Telefono": "",
+  "Direccion": ""
+},{
+  "_id": {
+    "$oid": "645e106971419c0259106e30"
+  },
+  "Nombre": "Goku",
+  "Apellido": {
+    "apellido1": "Pizza",
+    "apellido2": "Cowabunga"
+  },
+  "Nacimiento": {
+    "$date": "2007-08-11T00:00:00.000Z"
+  },
+  "Carrera": "Ingenieria en Desarrollo de Software",
+  "Estatus": "Inscrito",
+  "Correo": "",
+  "Telefono": "",
+  "Direccion": ""
+}]
