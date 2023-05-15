@@ -10,18 +10,9 @@ os.system('cls')
 
 # Instanciar un cliente de Mongo
 
-
-
-
-username = urllib.parse.quote_plus(input("Escriba el nombre del usurio: \n"))
-password = urllib.parse.quote_plus(input("Escriba el nombre del usurio: \n")) 
   
 
 client = MongoClient('mongodb://localhost:27017/')
-
-
-                     
-
 
 
 db = client['Evidencia3']
@@ -32,17 +23,31 @@ col2 = db['Carreras']
 
 i = 1
 
+def displayUser():
+    os.system('cls')
+    for deez in col.find({}):
+        for keys in deez.keys(): 
+            print ('{', keys, ":" , deez[keys] , '}' )
+
 
 def addAlumno():
     os.system('cls')
     nombre = input("Nombre del alumno ")
-    apellido1 = input("Primer Apellido ")
-    apellido2 = input("Segundo Apellido ")
+    apellido1 = input("Apellido Paterno ")
+    apellido2 = input("Apellido Materno ")
     year = int(input("Año de nacimiento "))
     Mes = int(input("Mes de nacimiento "))
     Dia = int(input("Dia de nacimiento "))
+    
     Carrera = input("Nombre de carrera ")        
-    Estatus = input("Estatus (Inscrito o No Inscrito) ")
+    ins = 0
+    while ins == 0:
+        Estatus = input("Estatus (Inscrito o No Inscrito) ")
+        if Estatus != "Inscrito" and Estatus != "No Inscrito":
+            print("Ese no es un valor valido!")
+        else:
+          newvalues = { "$set": {"Estatus": Estatus}}
+          ins = 1
     
     col.insert_one({
         'Nombre': nombre,
@@ -66,51 +71,55 @@ def addCarrera():
     
 def delete():
     os.system('cls')
+    for x in col.find({},{ "_id": 0, "Nombre": 1 }):
+        print(x) 
     nombre = input("Nombre del alumno del que quieres dar de baja ")
     myquery = { "Nombre": nombre}
+    
+    
 
     col.delete_one(myquery)
-    input("Presione cualquier cosa para continuar ")
+    input("Presione Enter para continuar ")
     
     
 def update():
     os.system('cls')
-    nombre = input("Nombre del alumno del que quieres modificar ")
+    for x in col.find({},{ "_id": 0, "Nombre": 1 }):
+        print(x) 
+    nombre = input("Nombre del alumno del que quieres modificar: ")
     myquery = { "Nombre": nombre}
-    nombre = input("Nombre del alumno ")
+    nombre = input("Nombre del alumno: ")
     newvalues = { "$set": {"Nombre": nombre}}
     col.update_one(myquery, newvalues)
-    apellido1 = input("Primer Apellido ")
+    apellido1 = input("Apellido Paterno: ")
     newvalues = { "$set": {"apellido1": apellido1}}
     col.update_one(myquery, newvalues)
-    apellido2 = input("Segundo Apellido ")
+    apellido2 = input("Apellido Materno: ")
     newvalues = { "$set": {"apellido2": apellido2}}
     col.update_one(myquery, newvalues)
-    Carrera = input("Nombre de carrera ")
+    Carrera = input("Nombre de carrera: ")
     newvalues = { "$set": {"Carrera": Carrera}}
     col.update_one(myquery, newvalues)
-    Estatus = input("Estatus (Inscrito o No Inscrito) ")
-    newvalues = { "$set": {"Estatus": Estatus}}
+    ins = 0
+    while ins == 0:
+        Estatus = input("Estatus (Inscrito o No Inscrito) ")
+        if Estatus != "Inscrito" and Estatus != "No Inscrito" and Estatus != "":
+            print("Ese no es un valor valido!")
+        else:
+          newvalues = { "$set": {"Estatus": Estatus}}
+          ins = 1
     col.update_one(myquery, newvalues)
-    Correo = input("Correo: ")
+    Correo = input("Correo*: ")
     newvalues = { "$set": {"Correo": Correo}}
     col.update_one(myquery, newvalues)
-    Telefono = input("Telefono: ")
+    Telefono = input("Telefono*: ")
     newvalues = { "$set": {"Telefono": Telefono}}
     col.update_one(myquery, newvalues)
-    Direccion = input("Direccion: ")
+    Direccion = input("Direccion*: ")
     newvalues = { "$set": {"Direccion": Direccion}}
     col.update_one(myquery, newvalues)
-    input("Presione cualquier cosa para continuar")
+    input("Presione Enter para continuar")
 
-
-
-
-def displayUser():
-    os.system('cls')
-    for deez in col.find({}):
-        for keys in deez.keys(): 
-            print ('{', keys, ":" , deez[keys] , '}' )
             
             
 def displayCarrera():
@@ -130,11 +139,10 @@ while i == 1:
 
     if menu_select == 1:
         displayUser()
-        input("Presione cualquier cosa para continuar")
+        input("Presione Enter para continuar")
     elif menu_select == 2:
         displayCarrera() 
-        input("Presione cualquier cosa para continuar")
-         
+        input("Presione Enter para continuar")
     elif menu_select == 3:
         addAlumno()   
     elif menu_select == 4:
