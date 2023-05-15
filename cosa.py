@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from pymongo import ASCENDING, DESCENDING
 from datetime import datetime
+import urllib.parse
 import os
 
 
@@ -8,9 +9,19 @@ os.system('cls')
 
 
 # Instanciar un cliente de Mongo
-client = MongoClient('localhost',
-                     port=27017,
-                     )
+
+
+
+
+username = urllib.parse.quote_plus(input("Escriba el nombre del usurio: \n"))
+password = urllib.parse.quote_plus(input("Escriba el nombre del usurio: \n")) 
+  
+
+client = MongoClient('mongodb://localhost:27017/')
+
+
+                     
+
 
 
 db = client['Evidencia3']
@@ -94,7 +105,20 @@ def update():
 
 
 
-    
+
+def displayUser():
+    os.system('cls')
+    for deez in col.find({}):
+        for keys in deez.keys(): 
+            print ('{', keys, ":" , deez[keys] , '}' )
+            
+            
+def displayCarrera():
+    os.system('cls')
+    for deez in col2.find({}):
+        for keys in deez.keys(): 
+            print ('{', keys, ":" , deez[keys] , '}' )
+
     
 
 
@@ -105,12 +129,10 @@ while i == 1:
     menu_select = int(input("1- Consulta de informacion de alumnos. \n2- Consulta de informacion de carreras. \n3- Alta un alumno. \n4- Alta una carrera \n5- Baja de un alumno. \n6- Modificacion de un Alumno \n7- Cerrar programa ")) 
 
     if menu_select == 1:
-        for documento in col.find({}): 
-            print(documento) 
+        displayUser()
         input("Presione cualquier cosa para continuar")
     elif menu_select == 2:
-        for documento in col2.find({}): 
-            print(documento)    
+        displayCarrera() 
         input("Presione cualquier cosa para continuar")
          
     elif menu_select == 3:
