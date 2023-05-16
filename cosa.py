@@ -26,8 +26,10 @@ i = 1
 def displayUser():
     os.system('cls')
     for deez in col.find({}):
+        print("\n")
         for keys in deez.keys(): 
             print ('{', keys, ":" , deez[keys] , '}' )
+    print("\n")
 
 
 def addAlumno():
@@ -51,7 +53,7 @@ def addAlumno():
     
     col.insert_one({
         'Nombre': nombre,
-        'Apellido': {'apellido1': apellido1, 'apellido2': apellido2},
+        'Apellidos': {'apellido1': apellido1, 'apellido2': apellido2},
         'Nacimiento': datetime(year, Mes, Dia, 0, 0),
         'Carrera': Carrera,
         'Estatus': Estatus, 'Correo': '', 'Telefono': '', 'Direccion': ''
@@ -88,36 +90,32 @@ def update():
         print(x) 
     nombre = input("Nombre del alumno del que quieres modificar: ")
     myquery = { "Nombre": nombre}
+    
     nombre = input("Nombre del alumno: ")
-    newvalues = { "$set": {"Nombre": nombre}}
-    col.update_one(myquery, newvalues)
     apellido1 = input("Apellido Paterno: ")
-    newvalues = { "$set": {"apellido1": apellido1}}
-    col.update_one(myquery, newvalues)
     apellido2 = input("Apellido Materno: ")
-    newvalues = { "$set": {"apellido2": apellido2}}
-    col.update_one(myquery, newvalues)
     Carrera = input("Nombre de carrera: ")
-    newvalues = { "$set": {"Carrera": Carrera}}
-    col.update_one(myquery, newvalues)
+
     ins = 0
     while ins == 0:
         Estatus = input("Estatus (Inscrito o No Inscrito) ")
         if Estatus != "Inscrito" and Estatus != "No Inscrito" and Estatus != "":
             print("Ese no es un valor valido!")
         else:
-          newvalues = { "$set": {"Estatus": Estatus}}
           ins = 1
-    col.update_one(myquery, newvalues)
+  
     Correo = input("Correo*: ")
-    newvalues = { "$set": {"Correo": Correo}}
-    col.update_one(myquery, newvalues)
     Telefono = input("Telefono*: ")
-    newvalues = { "$set": {"Telefono": Telefono}}
-    col.update_one(myquery, newvalues)
     Direccion = input("Direccion*: ")
-    newvalues = { "$set": {"Direccion": Direccion}}
-    col.update_one(myquery, newvalues)
+    col.update_one(
+    myquery, {"$set": {"Nombre": nombre, 
+    "Apellidos": {'apellido1': apellido1, 'apellido2': apellido2}, 
+    "Carrera": Carrera, 
+    "Estatus": Estatus, 
+    "Correo": Correo, 
+    "Telefono": Telefono, 
+    "Direccion": Direccion}})
+
     input("Presione Enter para continuar")
 
             
@@ -144,9 +142,11 @@ while i == 1:
         displayCarrera() 
         input("Presione Enter para continuar")
     elif menu_select == 3:
-        addAlumno()   
+        addAlumno()
+        input("Presione Enter para continuar")
     elif menu_select == 4:
-        addCarrera()  
+        addCarrera()
+        input("Presione Enter para continuar")
     elif menu_select == 5:
         delete()    
     elif menu_select == 6:
